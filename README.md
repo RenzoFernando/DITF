@@ -2,7 +2,7 @@
 **Un proyecto por Renzo Fernando Mosquera Daza**
 <p align="center">
   <a href="https://renzofernando.github.io/DITF/" target="_blank">
-    <img src="https://img.shields.io/badge/📖 Leer el Análisis Completo-%23ff3566?style=for-the-badge&logo=github&logoColor=white" alt="Leer el Análisis Completo">
+    <img src="https://img.shields.io/badge/Leer el Análisis Completo-%23ff3566?style=for-the-badge&logo=github&logoColor=white" alt="Leer el Análisis Completo">
   </a>
 </p>
 
