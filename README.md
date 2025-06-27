@@ -1,19 +1,8 @@
 # Darling in the FranXX: Un Análisis Personal  
 **Un proyecto por Renzo Fernando Mosquera Daza**
-
 <p align="center">
-  <a href="https://renzofernando.github.io/DITF/" target="_blank" style="
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #ff7171, #ff3566);
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  ">
-    Leer el Análisis Completo →
+  <a href="https://renzofernando.github.io/DITF/" target="_blank">
+    <img src="https://img.shields.io/badge/📖 Leer el Análisis Completo-%23ff3566?style=for-the-badge&logo=github&logoColor=white" alt="Leer el Análisis Completo">
   </a>
 </p>
 
