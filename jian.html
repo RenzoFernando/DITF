@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Leyenda del Jian - Mi Análisis de DITF</title>
+    <!-- Estilos de fuente para consistencia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!--
+      NOTA: Estos estilos son para esta página. Para una mejor organización,
+      puedes moverlos a un archivo "css/episodio.css" y enlazarlo.
+    -->
+    <style>
+        :root {
+            --color-red: #fe3e1a;
+            --color-blue: #00a8e1;
+            --color-orange: #f47521; /* Color Zapote/Naranja */
+            --dark-bg: #0D0F12;
+            --card-bg: #1A1C20;
+            --text-primary: #F0F0F0;
+            --text-secondary: #A0A0A0;
+            --font-body: 'Lato', sans-serif;
+            --font-heading: 'Roboto Slab', serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .header-logo img {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        .header-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: var(--text-secondary);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        .artistic-header {
+            height: 90vh; /* CAMBIO: Altura ligeramente reducida */
+            display: flex;
+            flex-direction: column; /* CAMBIO: Para apilar elementos */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-image: linear-gradient(to top, rgba(13, 15, 18, 1) 15%, rgba(13, 15, 18, 0.4) 60%, transparent 100%), url('https://images.unsplash.com/photo-1518826531980-19545d5a3597?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center 60%;
+            padding: 20px;
+        }
+
+        .artistic-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 8vw, 5rem); /* CAMBIO: Tamaño de título ajustado */
+            color: var(--text-primary);
+            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            margin: 0 0 20px 0;
+        }
+
+        /* CAMBIO: Subtítulo añadido para llenar el espacio */
+        .artistic-header .subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-secondary);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            max-width: 600px;
+            margin: 0;
+        }
+
+        .artistic-header .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            color: var(--text-primary);
+            font-weight: 700;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .article-container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 3em;
+            margin-bottom: 1.5em;
+        }
+
+        /* CAMBIO: Clases de color para los títulos */
+        .title-blue { color: var(--color-blue); }
+        .title-red { color: var(--color-red); }
+
+        .article-content p, .article-content blockquote {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: 1.8em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .article-content p.visible, .article-content blockquote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .article-content strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--color-blue);
+            padding-left: 2em;
+            margin: 2em 0;
+            font-style: italic;
+            color: var(--text-primary);
+            position: relative;
+        }
+        .article-content blockquote::before {
+            content: '“';
+            font-family: 'Times New Roman', serif;
+            position: absolute;
+            left: -10px;
+            top: -20px;
+            font-size: 5em;
+            color: var(--color-blue);
+            opacity: 0.3;
+        }
+
+        .separator {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+            margin: 4em 0;
+        }
+
+        @media (max-width: 600px) {
+            .page-header {
+                padding: 15px 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="page-header">
+    <a href="index.html" class="header-logo">
+        <img src="images/logo.avif" alt="Logo Darling in the FranXX">
+    </a>
+    <a href="index.html" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Volver</span>
+    </a>
+</header>
+
+<section class="artistic-header">
+    <h1>La Leyenda del Jian</h1>
+    <p class="subtitle">El ave mitológica que solo puede volar al encontrar a su otra mitad.</p>
+    <div class="scroll-indicator">↓</div>
+</section>
+
+<main class="article-container">
+    <article class="article-content">
+
+        <!-- Sección 1: La Leyenda Original -->
+        <h2 class="title-blue">La Leyenda del Jian (比翼鸟) - El Ave que Comparte Alas</h2>
+
+        <p>
+            El <strong>Jian (比翼鸟, bǐyìniǎo)</strong> es una figura prominente en la mitología china, un ave que nace inherentemente incompleta. La leyenda describe a esta criatura con un solo ojo y una sola ala, lo que la condena a una vida terrestre a menos que encuentre a su contraparte. Solo cuando dos Jian se unen pueden volar, fusionándose en una sola entidad para surcar los cielos.
+        </p>
+        <p>
+            Esta poderosa imagen de unidad y amor predestinado fue inmortalizada por el poeta Bai Juyi en su obra del siglo IX, <strong>"Canción del Dolor Eterno" (長恨歌)</strong>. El poema narra la trágica historia de amor entre el emperador Xuanzong y su consorte Yang Guifei. Al final del poema, el emperador lamenta su pérdida y jura reencontrarse con ella, pronunciando los versos que se han convertido en la máxima expresión de este mito:
+        </p>
+        <blockquote>
+            En el cielo, juramos ser como el Jian, aves que vuelan juntas. En la tierra, juramos ser como ramas entrelazadas.
+        </blockquote>
+        <p>
+            Por lo tanto, el Jian no solo representa la interdependencia, sino un amor tan absoluto que trasciende lo individual y se convierte en un símbolo de unidad inseparable y eterna.
+        </p>
+
+        <hr class="separator">
+
+        <!-- Sección 2: Mi Análisis -->
+        <h2 class="title-red">Mi Interpretación en Darling in the FranXX</h2>
+        <p>
+            Cuando analizo *Darling in the FranXX*, me es imposible no ver esta leyenda como la tesis central de toda la obra. Para mí, no es un simple adorno poético, sino la clave que nos entregan para descifrar el complejo y profundo vínculo entre Hiro y Zero Two.
+        </p>
+        <p>
+            Veo en ellos la encarnación perfecta de esta leyenda. Ambos, a su manera, estaban rotos, varados en tierra. Hiro había perdido su capacidad de "volar", su propósito en el mundo. Zero Two, estigmatizada como un monstruo, anhelaba una humanidad que se le escapaba. Eran dos mitades de un todo, incapaces de alcanzar su propio cielo por sí solas.
+        </p>
+        <p>
+            Su encuentro es el catalizador que les permite no solo pilotar un FranXX, sino, en un sentido mucho más profundo, <strong>redefinir su propia existencia</strong>. Su conexión no es una simple sincronización; es una simbiosis que les permite crear un mundo propio, un firmamento que nadie más puede ver o comprender.
+        </p>
+        <p>
+            Por eso, cuando analizo su relación, no la veo como una simple dependencia. La veo como la manifestación de la idea más pura del amor: no se trata de encontrar a alguien perfecto, sino a esa persona que posee exactamente lo que a ti te falta, permitiéndote, por fin, ser tú mismo en tu totalidad y alzar el vuelo.
+        </p>
+    </article>
+</main>
+
+<!--
+  NOTA: Este script es para las animaciones de esta página.
+  Para una mejor organización, puedes moverlo a un nuevo archivo "js/jian-scripts.js"
+  y enlazarlo con: <script src="js/jian-scripts.js" defer></script> antes de cerrar el </body>.
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const animatedElements = document.querySelectorAll('.article-content p, .article-content blockquote, .article-content h2');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Añade un pequeño retraso a cada elemento para que aparezcan en secuencia
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+
+</body>
+</html>

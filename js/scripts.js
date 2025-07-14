@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { num: 21, title: 'Por ti, mi amor' }, { num: 22, title: 'Pioneros' },
             { num: 23, title: 'Darling in the FRANXX' }, { num: 24, title: 'Nunca me dejes ir' }
         ];
-        
+
         const container = document.querySelector('.episodes-list');
-        if (!container) return; 
+        if (!container) return;
 
         container.innerHTML = '';
 
@@ -26,10 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('a');
             card.href = `capitulos/capitulo${ep.num}.html`;
             card.className = 'episode-card animate-on-scroll';
+            // CAMBIO: Estructura interna de la tarjeta actualizada para el nuevo CSS
             card.innerHTML = `
-                <div class="episode-number">${String(ep.num).padStart(2, '0')}</div>
-                <div class="episode-content">
+                <div class="episode-header">
+                    <div class="episode-number">${String(ep.num).padStart(2, '0')}</div>
                     <h3>${ep.title}</h3>
+                </div>
+                <div class="episode-content">
                     <span class="episode-cta">Leer mi Análisis</span>
                 </div>
             `;
@@ -42,36 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Lógica de Animaciones de Scroll Mejorada ---
     const setupScrollAnimations = () => {
         const scrollElements = document.querySelectorAll('.animate-on-scroll');
-        
+
         const scrollObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const target = entry.target;
                     target.classList.add('is-visible');
-                    
-                    // MEJORA: Animación escalonada para elementos en una cuadrícula
+
                     const gridItems = target.querySelectorAll('.point-card, .episode-card, .gallery-item');
                     if (gridItems.length > 0) {
                         gridItems.forEach((item, index) => {
                             item.style.transitionDelay = `${index * 70}ms`;
                         });
                     }
-                    
+
                     observer.unobserve(target);
                 }
             });
-        }, { 
+        }, {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         });
-        
+
         scrollElements.forEach(element => {
             scrollObserver.observe(element);
         });
     };
 
     setupScrollAnimations();
-    
+
     // --- Lógica de la Barra de Navegación ---
     const setupNavbar = () => {
         const navbar = document.querySelector('.navbar');
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupNavbar();
 
-    // --- NUEVO: Lógica del botón "Volver Arriba" ---
+    // --- Lógica del botón "Volver Arriba" ---
     const setupBackToTopButton = () => {
         const backToTopButton = document.querySelector('.back-to-top');
         if(backToTopButton) {
