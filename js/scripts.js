@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         episodes.forEach(ep => {
             const card = document.createElement('a');
-            card.href = `capitulos/capitulo${ep.num}.html`;
+            // CAMBIO: La ruta ahora apunta a la carpeta "episodios"
+            card.href = `episodios/episodio${ep.num}.html`;
             card.className = 'episode-card animate-on-scroll';
-            // CAMBIO: Estructura interna de la tarjeta actualizada para el nuevo CSS
             card.innerHTML = `
                 <div class="episode-header">
                     <div class="episode-number">${String(ep.num).padStart(2, '0')}</div>
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateEpisodeList();
 
-    // --- Lógica de Animaciones de Scroll Mejorada ---
+    // --- Lógica de Animaciones de Scroll ---
     const setupScrollAnimations = () => {
         const scrollElements = document.querySelectorAll('.animate-on-scroll');
 

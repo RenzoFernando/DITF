@@ -443,7 +443,6 @@ body::-webkit-scrollbar-thumb:hover {
     color: var(--text-primary);
 }
 
-/* CAMBIO: Estilos para el nuevo botón de GitHub */
 .github-link {
     display: inline-flex;
     align-items: center;

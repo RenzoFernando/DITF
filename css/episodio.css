@@ -260,3 +260,56 @@
     .episode-navigation.bottom-nav { flex-direction: column; gap: 15px; }
     .nav-button { text-align: center; }
 }
+/* --- Estilos Adicionales para Navegación de Episodios --- */
+
+/* Contenedor para agrupar logo y home */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Botón de Home en el Header */
+.nav-button-header.icon-button {
+    padding: 8px; /* Padding ajustado para un ícono */
+    line-height: 0; /* Asegura que el ícono se centre bien */
+}
+
+/* Navegación inferior con tres botones */
+.episode-navigation.bottom-nav {
+    align-items: center; /* Centra verticalmente los botones */
+}
+
+/* Botón central para ver todos los episodios */
+.all-episodes-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--color-blue);
+    color: var(--dark-bg);
+    border-color: var(--color-blue);
+    font-size: 1rem;
+    padding: 14px 28px;
+}
+
+.all-episodes-button:hover {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    color: var(--text-primary);
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .episode-navigation.bottom-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-button, .all-episodes-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
