@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         episodes.forEach(ep => {
             const card = document.createElement('a');
-            // CAMBIO: La ruta ahora apunta a la carpeta "episodios"
             card.href = `episodios/episodio${ep.num}.html`;
             card.className = 'episode-card animate-on-scroll';
             card.innerHTML = `
@@ -106,6 +105,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupBackToTopButton();
 
-    // Dispara las animaciones iniciales
+    // lógica para la Galería Lightbox ---
+    const setupLightbox = () => {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox) return;
+
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+
+        let currentImageIndex;
+        const images = Array.from(galleryItems).map(item => item.href);
+
+        const openLightbox = (index) => {
+            currentImageIndex = index;
+            lightboxImg.src = images[currentImageIndex];
+            lightbox.classList.add('active');
+            document.body.classList.add('lightbox-active');
+        };
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            document.body.classList.remove('lightbox-active');
+        };
+
+        const showNextImage = () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            lightboxImg.src = images[currentImageIndex];
+        };
+
+        const showPrevImage = () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            lightboxImg.src = images[currentImageIndex];
+        };
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLightbox(index);
+            });
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrevImage);
+        nextBtn.addEventListener('click', showNextImage);
+
+        // Cerrar con la tecla Escape y navegar con flechas del teclado
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+                if (e.key === 'ArrowRight') {
+                    showNextImage();
+                }
+                if (e.key === 'ArrowLeft') {
+                    showPrevImage();
+                }
+            }
+        });
+
+        // Cerrar al hacer clic fuera de la imagen
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    };
+
+    setupLightbox();
+
     document.body.classList.add('loaded');
 });
