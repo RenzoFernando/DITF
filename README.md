@@ -7,13 +7,9 @@
 
 </a>
 
-<a href="https://github.com/RenzoFernando/DITF" target="\_blank">
-
-<img src="https://img.shields.io/badge/Ver%20el%20Código-%2300a8e1?style=for-the-badge&logo=github&logoColor=white" alt="Ver el Código">
-
-</a>
 
 </p>
+
 ### **Un proyecto de análisis profundo por** Renzo Fernando Mosquera Daza
 A ver, la cosa es así: este proyecto no es una simple reseña. Es la materialización de una deuda personal con una historia que me marcó de una forma que pocas han logrado. *Darling in the FranXX* fue uno de los primeros animes que me voló la cabeza, y se quedó conmigo mucho después de que los créditos del último capítulo terminaran.
 
